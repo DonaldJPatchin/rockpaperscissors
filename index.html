@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function userChoice() {
+        const userChoice = prompt("Rock, Paper, Or scissors?").toLowerCase();
+        return userChoice
+    }
+        function computerPlay() {
+            let computerPlay = Math.random();
+            if (computerPlay < 0.33) {
+                computerPlay = "rock";
+            } else if (computerPlay < 0.66) {
+                computerPlay = "paper";
+            } else {
+                computerPlay = "scissors";
+            }
+            return computerPlay
+        }
+        
+    function playRps(userChoice, computerPlay) {
+        // Rock
+        if (userChoice === "rock" && computerPlay === "rock") {
+            return "Tie";
+        } else if (userChoice === "rock" && computerPlay === "scissors") {
+            return "You Win!";
+        } else if (userChoice === "rock" && computerPlay === "paper") {
+            return "You Lose...";
+        }
+        // Paper
+        else if (userChoice === "paper" && computerPlay === "paper") {
+            return "Tie";
+        } else if (userChoice === "paper" && computerPlay === "rock") {
+            return "You Win!";
+        } else if (userChoice === "paper" && computerPlay === "scissors") {
+            return "You Lose...";
+        }
+        // Scissors
+        else if (userChoice === "scissors" && computerPlay === "scissors") {
+            return "Tie";
+        } else if (userChoice === "scissors" && computerPlay === "paper") {
+            return "You Win!";
+        } else if (userChoice === "scissors" && computerPlay === "rock") {
+            return "You Lose..."
+        }
+    }
+    console.log(playRps(userChoice(), computerPlay()))
+    </script>
+</body>
+</html>
