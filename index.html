@@ -50,7 +50,35 @@
             return "You Lose..."
         }
     }
-    console.log(playRps(userChoice(), computerPlay()))
+    let userScore = 0;
+    let computerScore = 0;
+    let rolled = "You Win!";
+    let lose = "You Lose...";
+
+    function scoreBoard(result, userScore, computerScore) {
+        if (result === rolled) {
+            userScore++;
+        }
+        else if (result === lose) {
+            computerScore++;
+        }
+    }
+    
+
+    for (let i = 0; i < 5; i++) {
+        let result = (playRps(userChoice(), computerPlay()));
+        console.log(result);
+        scoreBoard(result, userScore, computerScore);
+        //console.log("scoreBoard = " + scoreBoard())
+       // let winLoss = playRps()
+       // if (result === lose) {
+       //      computerScore++;
+       // } else if (result === rolled) {
+       //      userScore++;
+       // }
+        console.log("Your score = " + userScore);
+        console.log("Computer score = " + computerScore);
+    }
     </script>
 </body>
 </html>
