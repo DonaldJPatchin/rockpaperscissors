@@ -6,79 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<h1>Rock Paper Scissors</h1>
+<div id="buttons">
+<button type="button" class="selection" id = "rock">Rock</button>
+<button type="button" class="selection" id = "paper">Paper</button>
+<button type="button" class="selection" id = "scissors">Scissors</button>
+<div id="results">
+</div>
+</div>
+<div id="score">
+</div>
 <body>
-    <script>
-    function userChoice() {
-        const userChoice = prompt("Rock, Paper, Or scissors?").toLowerCase();
-        return userChoice
-    }
-        function computerPlay() {
-            let computerPlay = Math.random();
-            if (computerPlay < 0.33) {
-                computerPlay = "rock";
-            } else if (computerPlay < 0.66) {
-                computerPlay = "paper";
-            } else {
-                computerPlay = "scissors";
-            }
-            return computerPlay
-        }
-        
-    function playRps(userChoice, computerPlay) {
-        // Rock
-        if (userChoice === "rock" && computerPlay === "rock") {
-            return "Tie";
-        } else if (userChoice === "rock" && computerPlay === "scissors") {
-            return "You Win!";
-        } else if (userChoice === "rock" && computerPlay === "paper") {
-            return "You Lose...";
-        }
-        // Paper
-        else if (userChoice === "paper" && computerPlay === "paper") {
-            return "Tie";
-        } else if (userChoice === "paper" && computerPlay === "rock") {
-            return "You Win!";
-        } else if (userChoice === "paper" && computerPlay === "scissors") {
-            return "You Lose...";
-        }
-        // Scissors
-        else if (userChoice === "scissors" && computerPlay === "scissors") {
-            return "Tie";
-        } else if (userChoice === "scissors" && computerPlay === "paper") {
-            return "You Win!";
-        } else if (userChoice === "scissors" && computerPlay === "rock") {
-            return "You Lose..."
-        }
-    }
+    <script type = "text/javascript">
     let userScore = 0;
     let computerScore = 0;
-    let rolled = "You Win!";
-    let lose = "You Lose...";
-
-    function scoreBoard(result, userScore, computerScore) {
-        if (result === rolled) {
-            userScore++;
-        }
-        else if (result === lose) {
-            computerScore++;
-        }
-    }
+    //     document.getElementById('rock').onclick = userChoice;
+    //     document.getElementById('paper').onclick = userChoice;
+    //     document.getElementById('scissors').onclick = userChoice;
+      
+    // function userChoice() {
+    //      let choice = window.prompt("Rock, Paper, Or scissors?").toLowerCase();
+    //      return choice.charAt(0).toUpperCase() + choice.slice(1);
+        
+    // }
+        function computerPlay() {
+            let computer = Math.random();
+            if (computer < 0.3333) {
+                computer = "rock";
+            } else if (computer < 0.6666) {
+                computer = "paper";
+            } else {
+                computer = "scissors";
+            }
+            return computer
     
+        }
+        
+    function playRps(e) {
+        player = e.srcElement.id;
+        computer = computerPlay();
+        console.log("Your selection: " + player);
+        console.log("Computer selection: " + computer);
+        // Rock
+        if (player === "rock" && computer === "rock") {
+            return "Tie";
+        } else if (player === "rock" && computer === "scissors") {
+            userScore++
+            updateScore("You Win! Rock beats scissors.");
+        } else if (player === "rock" && computer === "paper") {
+            computerScore++
+            updateScore("You Lose... Rock loses to paper...");
+        }
+        // Paper
+        else if (player === "paper" && computer === "paper") {
+            return "Tie";
+        } else if (player === "paper" && computer === "rock") {
+            userScore++
+            updateScore("You Win! Paper beats rock.");
+        } else if (player === "paper" && computer === "scissors") {
+            computerScore++
+            updateScore("You Lose... Paper loses to scissors...");
+        }
+        // Scissors
+        else if (player === "scissors" && computer === "scissors") {
+            return "Tie";
+        } else if (player === "scissors" && computer === "paper") {
+            userScore++
+            updateScore("You Win! Scissors beats paper.");
+        } else if (player === "scissors" && computer === "rock") {
+            computerScore++
+            updateScore("You Lose... Scissors loses rock...");
+        }     
+    } 
 
-    for (let i = 0; i < 5; i++) {
-        let result = (playRps(userChoice(), computerPlay()));
-        console.log(result);
-        scoreBoard(result, userScore, computerScore);
-        //console.log("scoreBoard = " + scoreBoard())
-       // let winLoss = playRps()
-       // if (result === lose) {
-       //      computerScore++;
-       // } else if (result === rolled) {
-       //      userScore++;
-       // }
-        console.log("Your score = " + userScore);
-        console.log("Computer score = " + computerScore);
+    function updateScore(result) {
+        document.getElementById("results").innerHTML= result;
+        document.getElementById("score").innerHTML = `Player: ${userScore} ✌️ Computer: ${computerScore}`;
+        gamer();
     }
+   
+    function gamer() {
+        if (computerScore == 5) {
+            alert("You Lose...");
+            computerScore = 0;
+            userScore = 0;
+        }
+        if (userScore == 5) {
+            alert("You Win!");
+            computerScore = 0;
+            userScore = 0;
+        }
+    }
+
+    function steeze() {
+        if(userScore < computerScore) {
+            console.log("You Lose...");
+        } else if(userScore > computerScore) {
+            console.log("You Win!")
+        }
+    }
+
+    let buttons = document.querySelectorAll('.selection');
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", playRps);
+    });
+    
+    steeze();
     </script>
 </body>
 </html>
